@@ -1,0 +1,132 @@
+<div class="container">
+    <div>
+        <H2>Role</H2>
+    </div>
+
+    <div class="alert alert-danger" ng-show="searchForm.show">
+        {{searchForm.message}}
+    </div>
+
+    <div class="form-group row">
+        <div class="col-lg-3">
+            <input class="form-control" type="text" ng-model="searchForm.name" placeholder="Name">
+        </div>
+        <div class="col-lg-3">
+            <input class="form-control" type="text" ng-model="searchForm.description" placeholder="Description">
+        </div>
+        <div class="col-lg-1">
+            <button class="btn btn-primary" ng-click="search()">Search
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+        <div class="col-lg-1">
+                <button class="btn btn-primary" onClick="window.location.reload()">Reset
+                    <i class="fas fa-undo"></i>
+                </button>
+            </div>
+        <div class="offset-lg-3">
+            <button class="btn btn-success " data-target="#update" data-toggle="modal" ng-click="display()">Add
+                <i class="fas fa-plus-circle"></i>
+            </button>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-sm table-bordered table-hover table-responsive-sm">
+                <thead class="thead-dark">
+                    <th scope="row">#</th>
+                    <th scope="row">Role
+                    </th>
+                    <th scope="row">Description
+                    </th>
+                    <th scope="row">Action</th>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="data in list">
+                        <td>{{$index+1}}</td>
+                        <td>{{data.name}}</td>
+                        <td>{{data.description}}</td>
+                        <td>
+                            <button type="button" ng-click="display(data.id)" data-target="#update" data-toggle="modal" class="btn btn-primary">
+                                <i class="fas fa-edit">
+                                </i>
+                            </button>
+                            <button type="button" ng-click="delete(data.id)" class="btn btn-danger" ng-disabled="(data.id)">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title ">Role Information</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <form class="form" name="roleForm" ng-submit="submit()" novalidate>
+
+                        <div class="alert alert-danger" ng-show="form.show && !form.success">
+                            {{form.message}}
+                        </div>
+                        <div class="alert alert-success" ng-show="form.show && form.success">
+                            {{form.message}}
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group row">
+                                <label class="col-lg-3 form-control-label">Name <font color="red">*</font></label>
+                                <div class="col-lg-9">
+                                    <input class="form-control" type="text" placeholder="Enter your Role Name" ng-model="form.name"  name="name" ng-pattern=" '^([a-zA-Z]+\s)*[a-zA-Z]+$'" required ng-class="{'is-invalid':roleForm.name.$error.required && roleForm.name.$touched}">
+                                    <span style="color: red" ng-show="roleForm.name.$dirty && roleForm.name.$error.pattern">Enter Valid Role Name</span>
+                                    <span  style="color:red" ng-show="roleForm.name.$error.required && roleForm.name.$touched">Role Name is Required</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-lg-3 form-control-label">Description <font color="red">*</font></label>
+                                <div class="col-lg-9">
+                                    <input class="form-control" type="text"placeholder="Enter your Description" ng-model="form.description" name="description" required ng-class="{'is-invalid':roleForm.description.$error.required && roleForm.description.$touched}">
+                                    <span style="color:red" ng-show="roleForm.description.$error.required && roleForm.name.$touched">Description Name is Required</span>
+                                    
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-lg-6">
+                                    <button type="submit" class="btn btn-primary form-control" ng-click="roleForm.$setUntouched();" ng-disabled="roleForm.$invalid && roleForm.$error">Save
+                                        <span class="fas fa-paper-plane"></span>
+                                    </button>
+                                </div>
+                                <div class="col-lg-6">
+                                    <button type="reset" class="btn btn-primary form-control" ng-click="resetForm()">Reset
+                                        <span class="fas fa-undo"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-lg-1">
+            <button class="btn btn-primary" ng-click="previous()" ng-disabled="searchForm.pageNo==0">
+                Previous
+            </button>
+        </div>
+        <div class="offset-lg-10">
+            <button class="btn btn-primary" ng-click="next()" ng-disabled="searchForm.pageNo==pagecount">
+                Next
+            </button>
+        </div>
+    </div>
+</div>

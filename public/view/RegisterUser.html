@@ -1,0 +1,126 @@
+<div class="container">
+
+    <div>
+        <H2>User Registration</H2>
+    </div>
+
+    
+
+<form class="Form" name="registerForm" ng-submit="submit()" novalidate>
+        <div class="alert alert-danger" ng-show="form.show && !form.success">
+                {{form.message}}
+            </div>
+            <div class="alert alert-success" ng-show="form.show && form.success">
+                {{form.message}}
+            </div>
+                        <div class="modal-body">
+
+                            <div class="form-group row">
+                                <label class="col-lg-3 form-control-label">First Name <font color="red">*</font> </label>
+                                <div class="col-lg-9">
+                                    <input class="form-control" type="text" placeholder="Enter your First Name" ng-model="form.firstName" name="firstName" ng-pattern=" '^([a-zA-Z]+\s)*[a-zA-Z]+$'" required ng-class="{'is-invalid':registerForm.firstName.$error.required && registerForm.firstName.$touched}">
+                                    <span style="color: red" ng-show="registerForm.firstName.$dirty && registerForm.firstName.$error.pattern">Enter Valid First Name</span>
+                                    <span style="color: red" ng-show="registerForm.firstName.$error.required && registerForm.firstName.$touched">First_Name is required</span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 form-control-label">Last Name <font color="red">*</font> </label>
+                                <div class="col-lg-9">
+                                    <input class="form-control" type="text" placeholder="Enter your Last Name" ng-model="form.lastName" name="lastName" ng-pattern=" '^([a-zA-Z]+\s)*[a-zA-Z]+$'" required ng-class="{'is-invalid':registerForm.lastName.$error.required && registerForm.lastName.$touched}">
+                                    <span style="color: red" ng-show="registerForm.lastName.$dirty && registerForm.lastName.$error.pattern">Enter Valid Last Name</span>
+                                    <span style="color: red" ng-show="registerForm.lastName.$error.required && registerForm.lastName.$touched">Last_Name is required</span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 form-control-label">Login <font color="red">*</font> </label>
+                                <div class="col-lg-9">
+                                    <input class="form-control" type="email" placeholder="Enter your Email Id" ng-model="form.login" name="login" ng-pattern=" '^[a-zA-Zs][a-zA-Z0-9]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$'"  required ng-class="{'is-invalid':registerForm.login.$error.required && registerForm.login.$touched}">
+                                    <span style="color: red" ng-show="registerForm.login.$error.required && registerForm.login.$touched">Login_Name is required</span>
+                                    <span style="color: red" ng-show="registerForm.login.$dirty && registerForm.login.$error.pattern">Please enter valid Email id.</span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 form-control-label">Password <font color="red">*</font> </label>
+                                <div class="col-lg-9">
+                                    <input class="form-control" type="password" placeholder="Enter your Password" ng-model="form.password"  name="password" ng-minlength="3" ng-maxlength="10" required ng-class="{'is-invalid':registerForm.password.$error.required && registerForm.password.$touched}">
+                                    <span style="color: red" ng-show="registerForm.password.$invalid && registerForm.password.$touched">Password is required</span>
+                                    <span  style="color:red" ng-show="registerForm.password.$touched && registerForm.password.$error.minlength">min 3 chars.</span>
+                                    <span style="color: red" ng-show="registerForm.password.$touched && registerForm.password.$error.maxlength">Max 10 chars.</span>
+                                </div>
+                            </div>
+                            <!-- <div class="form-group row">
+                                <label class="col-lg-3 form-control-label">Date Of Birth * </label>
+                                <div class="col-lg-9">
+                                    <datepicker date-format="y/MM/dd">
+                                        <input style="cursor: pointer" type="text" ng-model="form.dob" class="form-control" placeholder="DD-MM-YYYY" readonly required>
+                                        <label style="color: red" ng-show="registerForm.dob.$invalid && !registerForm.dob.$pristine && registerForm.dob.$touched">DOB is required</label>
+                                    </datepicker>
+                                </div>
+                            </div> -->
+                            <div class="form-group row">
+                                    <label class="col-lg-3 form-control-label">Date Of Birth <font color="red">*</font> </label>
+                                    <div class="col-lg-3">
+                                        <datepicker date-format="y/MM/dd">
+                                            <input style="cursor: pointer" type="text" placeholder="Enter your DOB" ng-model="form.dob" class="form-control" placeholder="DD-MM-YYYY" readonly required>
+                                            <label style="color: red" ng-show="userForm.dob.$invalid && !userForm.dob.$pristine && userForm.dob.$touched">DOB is required</label>
+                                        </datepicker>
+                                    </div>
+                                </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 form-control-label">Mobile <font color="red">*</font></label>
+                                <div class="col-lg-9">
+                                    <input class="form-control" type="text" placeholder="Enter your Mobile No" ng-model="form.mobileNo" name="mobileNo" ng-pattern="/^[7-9][0-9]{9}$/" ng-maxlength="10" ng-minlength="10" required ng-class="{'is-invalid':registerForm.mobileNo.$error.required && registerForm.mobileNo.$touched}">
+                                    <span style="color: red" ng-show="registerForm.mobileNo.$error.required && registerForm.mobileNo.$touched">Mobile_No is required</span>
+                                    <span  style="color:red" ng-show="registerForm.mobileNo.$touched && registerForm.mobileNo.$error.minlength">Min 10 No.</span>
+                                    <span style="color: red" ng-show="registerForm.mobileNo.$touched && registerForm.mobileNo.$error.maxlength">Max 10 No.</span>
+                                    <span style="color: red" ng-show="registerForm.mobileNo.$dirty && registerForm.mobileNo.$error.pattern">Mobile No Start From 7,8,9.</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-lg-3 form-control-label">Gender <font color="red">*</font></label>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" id="male" type="radio" ng-model="form.gender" value="M">
+                                    <label class="form-check-label" for="male">Male</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" id="female" type="radio" ng-model="form.gender" value="F">
+                                    <label class="form-check-label" for="female">Female</label>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+
+                                <label class="col-lg-3 form-control-label">Picture <font color="red">*</font> </label>
+                                <div class="col-lg-9">                                    
+                                    <img height="100px" ng-src="User/getPic/{{form.id}}">
+                                    <input class="form-control" type="file" file-model="files.pic">
+                                    <br>
+                                    <button type="button" ng-click="uploadPic(form.id)" class="btn btn-primary form-control">
+                                            Upload
+                                        </button>
+                                </div>
+                            </div>
+                    
+                            <div class="form-group row">
+                                <div class="col-lg-6">
+                                    <button type="submit" class="btn btn-primary form-control" ng-click="registerForm.$setUntouched();" ng-disabled="registerForm.$invalid && registerForm.$error">Save
+                                        <span class="fas fa-paper-plane"></span>
+                                    </button>
+                                </div>
+                            
+                         
+                                <div class="col-lg-6">
+                                    <a href="#!login" class="btn btn-primary form-control">Back to Login Page
+                                        
+                                    </a>
+                                </div> 
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  
+</div> 
